@@ -1,3 +1,15 @@
+# ShaRD-Demo Security Policy
+
+ShaRD-Demo is a research fork of Pi (earendil-works/pi), built to demonstrate
+third-party security controls embedded in an AI agent harness. This is a
+demonstration project — do not use in production.
+
+API keys and credentials are never stored in this repository. Keys are stored
+locally in ~/.pi/agent/auth.json which is excluded from version control.
+
+---
+
+
 # Security Policy
 
 This document should guide you about understanding the security concept behind

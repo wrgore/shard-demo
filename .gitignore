@@ -1,41 +1,89 @@
+# Node
 node_modules/
 dist/
 *.log
-.DS_Store
 *.tsbuildinfo
-# packages/*/node_modules/
+
+# Pi packages
 packages/*/dist/
 packages/*/dist-chrome/
 packages/*/dist-firefox/
-*.cpuprofile
 
-# Environment
-.env
-
-# Editor files
-.vscode/
-.zed/
-.idea/
-.claude/
-*.swp
-*.swo
-*~
-
-# Package specific
-.npm/
-coverage/
-.nyc_output/
+# Pi runtime
 .pi_config/
+.pi/hf-sessions/
+.pi/hf-sessions-backup/
 tui-debug.log
 compaction-results/
-.opencode/
 syntax.jsonl
 out.jsonl
 pi-*.html
 out.html
+collect.sh
 packages/coding-agent/binaries/
 todo.md
 plans/
-.pi/hf-sessions/
-.pi/hf-sessions-backup/
-collect.sh
+
+# ShaRD — credentials never commit
+auth.json
+trust.json
+sessions/
+*.jsonl
+sandyclaw.json
+*.key
+*.secret
+secrets/
+
+# Environment
+.env
+.env.*
+
+# Editor
+.vscode/
+.zed/
+.idea/
+.claude/
+.cursor/
+*.swp
+*.swo
+*~
+
+# npm
+.npm/
+coverage/
+.nyc_output/
+
+# macOS
+.DS_Store
+.AppleDouble
+
+# OpenCode
+.opencode/# Node
+node_modules/
+dist/
+.cache/
+
+# Pi runtime — credentials and sessions never commit
+~/.pi/
+.pi/
+auth.json
+trust.json
+sessions/
+*.jsonl
+
+# ShaRD / SandyClaw keys — belt and suspenders
+.env
+.env.*
+*.key
+*.secret
+secrets/
+sandyclaw.json
+
+# macOS
+.DS_Store
+.AppleDouble
+
+# Editor
+.cursor/
+.vscode/
+*.swp
