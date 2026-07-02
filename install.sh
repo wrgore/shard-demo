@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-echo "Installing ShaRD — Security Harness and Research Distribution"
+echo "Installing SHarD — Secure Harness Design"
 echo ""
 
 # --- Pi ---
@@ -29,6 +29,9 @@ else
     if curl -fsSL https://nono.sh/install.sh | sh; then
         echo "  nono installed."
         export PATH="$HOME/.local/bin:$PATH"
+        echo ""
+        echo "Note: nono was installed to ~/.local/bin. If 'nono' is not found after restarting your terminal, add this to your shell profile (~/.zshrc or ~/.bashrc):"
+        echo "  export PATH=\"\$HOME/.local/bin:\$PATH\""
     else
         echo "Warning: nono could not be installed automatically." >&2
         echo "  nono is recommended but not required to run ShaRD." >&2
@@ -42,22 +45,29 @@ echo ""
 echo "Installing SHarD nono profile..."
 PROFILE_DIR="$HOME/.config/nono/profiles"
 mkdir -p "$PROFILE_DIR"
-SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
-if cp "$SCRIPT_DIR/nono/pi.json" "$PROFILE_DIR/pi.json"; then
+if curl -fsSL https://raw.githubusercontent.com/wrgore/shard-demo/main/nono/pi.json -o "$PROFILE_DIR/pi.json"; then
   echo "✓ SHarD nono profile installed to $PROFILE_DIR/pi.json"
 else
-  echo "Warning: Could not install nono profile. You can install it manually by copying nono/pi.json to $PROFILE_DIR/pi.json"
+  echo "Warning: Could not install nono profile. Download it manually from:"
+  echo "  https://raw.githubusercontent.com/wrgore/shard-demo/main/nono/pi.json"
+  echo "  and copy it to $PROFILE_DIR/pi.json"
 fi
 
 echo ""
 
 # --- ShaRD Pi package ---
 echo "Installing ShaRD Pi package..."
-pi install git:github.com/wrgore/shard-demo --ignore-scripts
+pi install git:github.com/wrgore/shard-demo
 echo ""
 
-echo "ShaRD installed. Run 'pi' in any project directory to start."
+echo "================================================"
+echo "SHarD installation complete."
 echo ""
-echo "On first run, ShaRD will check for your SandyClaw API key and guide you through setup if needed."
+echo "Verifying installation..."
+pi --version && echo "✓ Pi installed" || echo "✗ Pi not found"
+nono --version && echo "✓ nono installed" || echo "✗ nono not found"
 echo ""
+echo "Run 'pi' in any project directory to start."
+echo "On first run, SHarD will check for your SandyClaw API key and guide you through setup if needed."
 echo "For best security, launch Pi via nono: nono run --profile pi -- pi"
+echo "================================================"
