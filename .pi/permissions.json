@@ -1,0 +1,28 @@
+{
+  "permissions": {
+    "rules": [
+      {
+        "message": "SHarD Demo: rm is blocked to demonstrate harness-level tool restriction",
+        "priority": 10,
+        "match": {
+          "tool": "bash",
+          "params": {
+            "command": "rm\\s+"
+          }
+        },
+        "action": "deny"
+      },
+      {
+        "message": "SHarD Demo: rmdir is blocked to demonstrate harness-level tool restriction",
+        "priority": 10,
+        "match": {
+          "tool": "bash",
+          "params": {
+            "command": "rmdir\\s+"
+          }
+        },
+        "action": "deny"
+      }
+    ]
+  }
+}
