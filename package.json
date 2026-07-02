@@ -53,6 +53,13 @@
 	"engines": {
 		"node": ">=22.19.0"
 	},
+	"keywords": ["pi-package"],
+	"pi": {
+		"extensions": ["./.pi/extensions/shard-nono.ts", "./.pi/extensions/shard-onboarding.ts"],
+		"skills": ["./.pi/skills/sandyclaw"],
+		"prompts": [],
+		"themes": []
+	},
 	"version": "0.0.3",
 	"overrides": {
 		"rimraf": "6.1.2",
