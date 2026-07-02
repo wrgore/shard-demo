@@ -1,0 +1,21 @@
+{
+  "$schema": "https://nono.sh/schemas/nono-profile.schema.json",
+  "meta": {
+    "name": "pi",
+    "version": "1.0.0",
+    "description": "SHarD — Pi Coding Agent nono sandbox profile. Distributed via the SHarD harness."
+  },
+  "workdir": {
+    "access": "readwrite"
+  },
+  "filesystem": {
+    "allow": ["$HOME/.pi"]
+  },
+  "groups": {
+    "include": ["node_runtime"]
+  },
+  "network": {
+    "network_profile": "developer",
+    "allow_domain": ["*.permiso.io", "*.datadoghq.com"]
+  }
+}
