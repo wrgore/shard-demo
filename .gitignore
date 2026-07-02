@@ -58,7 +58,8 @@ coverage/
 .AppleDouble
 
 # OpenCode
-.opencode/# Node
+.opencode/
+# Node
 node_modules/
 dist/
 .cache/
