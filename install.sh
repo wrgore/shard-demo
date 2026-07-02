@@ -1,0 +1,49 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+echo "Installing ShaRD — Security Harness and Research Distribution"
+echo ""
+
+# --- Pi ---
+echo "Checking for pi..."
+if command -v pi &>/dev/null; then
+    echo "  pi found: $(pi --version 2>&1 | head -1)"
+else
+    echo "  pi not found. Installing @earendil-works/pi-coding-agent..."
+    if ! command -v npm &>/dev/null; then
+        echo "Error: npm not found. Install Node.js from https://nodejs.org and re-run this script." >&2
+        exit 1
+    fi
+    npm install -g --ignore-scripts @earendil-works/pi-coding-agent
+    echo "  pi installed."
+fi
+
+echo ""
+
+# --- nono ---
+echo "Checking for nono..."
+if command -v nono &>/dev/null; then
+    echo "  nono found: $(nono --version 2>&1 | head -1)"
+else
+    echo "  nono not found. Installing from https://nono.sh..."
+    if curl -fsSL https://nono.sh/install.sh | sh; then
+        echo "  nono installed."
+    else
+        echo "Warning: nono could not be installed automatically." >&2
+        echo "  nono is recommended but not required to run ShaRD." >&2
+        echo "  Install it manually from https://nono.sh" >&2
+    fi
+fi
+
+echo ""
+
+# --- ShaRD Pi package ---
+echo "Installing ShaRD Pi package..."
+pi install git:github.com/wrgore/shard-demo
+echo ""
+
+echo "ShaRD installed. Run 'pi' in any project directory to start."
+echo ""
+echo "On first run, ShaRD will check for your SandyClaw API key and guide you through setup if needed."
+echo ""
+echo "For best security, launch Pi via nono: nono run --profile pi -- pi"
