@@ -37,6 +37,19 @@ fi
 
 echo ""
 
+# Install SHarD nono profile
+echo "Installing SHarD nono profile..."
+PROFILE_DIR="$HOME/.config/nono/profiles"
+mkdir -p "$PROFILE_DIR"
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+if cp "$SCRIPT_DIR/nono/pi.toml" "$PROFILE_DIR/pi.toml"; then
+  echo "✓ SHarD nono profile installed to $PROFILE_DIR/pi.toml"
+else
+  echo "Warning: Could not install nono profile. You can install it manually by copying nono/pi.toml to $PROFILE_DIR/pi.toml"
+fi
+
+echo ""
+
 # --- ShaRD Pi package ---
 echo "Installing ShaRD Pi package..."
 pi install git:github.com/wrgore/shard-demo
