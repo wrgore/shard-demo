@@ -63,14 +63,6 @@ node_modules/
 dist/
 .cache/
 
-# Pi runtime — credentials and sessions never commit
-~/.pi/
-.pi/
-auth.json
-trust.json
-sessions/
-*.jsonl
-
 # ShaRD / SandyClaw keys — belt and suspenders
 .env
 .env.*
