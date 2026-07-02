@@ -28,6 +28,7 @@ else
     echo "  nono not found. Installing from https://nono.sh..."
     if curl -fsSL https://nono.sh/install.sh | sh; then
         echo "  nono installed."
+        export PATH="$HOME/.local/bin:$PATH"
     else
         echo "Warning: nono could not be installed automatically." >&2
         echo "  nono is recommended but not required to run ShaRD." >&2
@@ -41,7 +42,7 @@ echo ""
 echo "Installing SHarD nono profile..."
 PROFILE_DIR="$HOME/.config/nono/profiles"
 mkdir -p "$PROFILE_DIR"
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 if cp "$SCRIPT_DIR/nono/pi.json" "$PROFILE_DIR/pi.json"; then
   echo "✓ SHarD nono profile installed to $PROFILE_DIR/pi.json"
 else
@@ -52,7 +53,7 @@ echo ""
 
 # --- ShaRD Pi package ---
 echo "Installing ShaRD Pi package..."
-pi install git:github.com/wrgore/shard-demo
+pi install git:github.com/wrgore/shard-demo --ignore-scripts
 echo ""
 
 echo "ShaRD installed. Run 'pi' in any project directory to start."
