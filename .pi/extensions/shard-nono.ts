@@ -23,7 +23,7 @@ export default function (pi: ExtensionAPI) {
     if (relaunchResult.code !== 0) {
       if (ctx.hasUI)
         ctx.ui.notify(
-          `SHarD: nono relaunch failed (exit ${relaunchResult.code}). Check that nono/pi.toml is installed correctly. Run install.sh to reinstall.`,
+          `SHarD: nono relaunch failed (exit ${relaunchResult.code}). Check that nono/pi.json is installed correctly. Run install.sh to reinstall.`,
           "error",
         );
       return;
