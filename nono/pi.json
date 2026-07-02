@@ -16,9 +16,9 @@
   },
   "network": {
     "network_profile": "developer",
-    "allow_domain": ["*.permiso.io", "*.datadoghq.com"]
+    "allow_domain": ["*.permiso.io", "*.datadoghq.com"],
+    "allow_http2": true
   },
   "interactive": true,
-  "allow_http2": true,
   "unsafe_macos_seatbelt_rules": ["(allow user-preference-read)"]
 }
