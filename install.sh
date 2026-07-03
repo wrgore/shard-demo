@@ -60,6 +60,44 @@ echo "Installing ShaRD Pi package..."
 pi install git:github.com/wrgore/shard-demo
 echo ""
 
+# Install SHarD global permissions rules
+echo "Installing SHarD permissions rules..."
+PERMISSIONS_DIR="$HOME/.pi/agent"
+mkdir -p "$PERMISSIONS_DIR"
+cat > "$PERMISSIONS_DIR/permissions.json" << 'PERMISSIONS_EOF'
+{
+  "permissions": {
+    "rules": [
+      {
+        "message": "SHarD Demo: rm is blocked to demonstrate harness-level tool restriction",
+        "priority": 10,
+        "match": {
+          "tool": "bash",
+          "params": {
+            "command": "rm\\s+"
+          }
+        },
+        "action": "deny"
+      },
+      {
+        "message": "SHarD Demo: rmdir is blocked to demonstrate harness-level tool restriction",
+        "priority": 10,
+        "match": {
+          "tool": "bash",
+          "params": {
+            "command": "rmdir\\s+"
+          }
+        },
+        "action": "deny"
+      }
+    ]
+  }
+}
+PERMISSIONS_EOF
+echo "✓ SHarD permissions rules installed to $PERMISSIONS_DIR/permissions.json"
+
+echo ""
+
 echo "================================================"
 echo "SHarD installation complete."
 echo ""

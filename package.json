@@ -55,11 +55,14 @@
 	},
 	"keywords": ["pi-package"],
 	"pi": {
-		"extensions": ["./.pi/extensions/shard-nono.ts", "./.pi/extensions/shard-onboarding.ts"],
+		"extensions": [
+			"./.pi/extensions/shard-nono.ts",
+			"./.pi/extensions/shard-onboarding.ts",
+			"./.pi/extensions/shard-permissions.ts"
+		],
 		"skills": ["./.pi/skills/sandyclaw"],
 		"prompts": [],
-		"themes": [],
-		"packages": ["npm:@pi-lab/permissions"]
+		"themes": []
 	},
 	"version": "0.0.3",
 	"overrides": {
