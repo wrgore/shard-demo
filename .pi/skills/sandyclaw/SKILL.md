@@ -79,7 +79,12 @@ You are an approved API-only SandyClaw agent principal.
 - Avoid interactive browser login. Use the provided API key for all access.
 
 ## Authentication
-- Send the provided API key in the `X-API-Key` header.
+- When running inside a nono sandbox, retrieve the API key from Pi auth storage:
+  `ctx.modelRegistry.authStorage.getApiKey("sandyclaw")`
+- When running outside a sandbox, the key may also be available in macOS Keychain
+  as "sandyclaw-api-key" via: `security find-generic-password -s sandyclaw-api-key -w`
+- The key is stored in `~/.pi/agent/auth.json` which is within the nono sandbox
+  boundary and always accessible
 - Treat the key as a secret. Do not print it in logs, screenshots, or reports.
 
 ## Configuration

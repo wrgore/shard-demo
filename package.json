@@ -58,7 +58,8 @@
 		"extensions": ["./.pi/extensions/shard-nono.ts", "./.pi/extensions/shard-onboarding.ts"],
 		"skills": ["./.pi/skills/sandyclaw"],
 		"prompts": [],
-		"themes": []
+		"themes": [],
+		"packages": ["npm:@pi-lab/permissions"]
 	},
 	"version": "0.0.3",
 	"overrides": {
