@@ -80,3 +80,6 @@ sandyclaw.json
 .cursor/
 .vscode/
 *.swp
+
+# SandyClaw key persistence (Option A file-based store) — never commit
+sandyclaw-auth.json

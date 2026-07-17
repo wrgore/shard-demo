@@ -1,10 +1,33 @@
 import type { ExtensionAPI } from "@earendil-works/pi-coding-agent";
+import { readFileSync, writeFileSync, mkdirSync } from "node:fs";
+import { homedir } from "node:os";
+import { join, dirname } from "node:path";
+
+// File-based persistence for the SandyClaw key.
+// ~/.pi is inside the nono sandbox boundary, so this path is allowed.
+const AUTH_FILE = join(homedir(), ".pi", "sandyclaw-auth.json");
+
+function readStoredKey(): string | undefined {
+  try {
+    const data = JSON.parse(readFileSync(AUTH_FILE, "utf8")) as { key?: string };
+    return data.key?.trim() || undefined;
+  } catch {
+    return undefined;
+  }
+}
+
+function writeStoredKey(key: string): void {
+  mkdirSync(dirname(AUTH_FILE), { recursive: true });
+  writeFileSync(
+    AUTH_FILE,
+    JSON.stringify({ type: "api_key", key }, null, 2) + "\n",
+    "utf8",
+  );
+}
 
 export default function (pi: ExtensionAPI) {
   pi.on("session_start", async (_event, ctx) => {
     if (!ctx.hasUI) return;
-
-    const authStorage = ctx.modelRegistry.authStorage;
 
     // Key discovery — check in order, stop at first success.
 
@@ -27,13 +50,13 @@ export default function (pi: ExtensionAPI) {
       key = process.env.SANDYCLAW_API_KEY?.trim() || undefined;
     }
 
-    // 3. Pi auth storage.
+    // 3. File-based persistence (~/.pi/sandyclaw-auth.json).
     if (!key) {
-      key = (await authStorage.getApiKey("sandyclaw"))?.trim() || undefined;
+      key = readStoredKey();
     }
 
     if (key) {
-      authStorage.set("sandyclaw", { type: "api_key", key });
+      writeStoredKey(key);
       ctx.ui.notify("ShaRD: SandyClaw key found and stored ✓", "info");
       return;
     }
@@ -125,10 +148,7 @@ export default function (pi: ExtensionAPI) {
         ctx.ui.notify("ShaRD: No key entered. Setup cancelled.", "warning");
         return;
       }
-      ctx.modelRegistry.authStorage.set("sandyclaw", {
-        type: "api_key",
-        key: key.trim(),
-      });
+      writeStoredKey(key.trim());
       ctx.ui.notify("ShaRD: SandyClaw key stored ✓", "info");
     },
   });
